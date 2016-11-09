@@ -68,7 +68,7 @@ namespace SaturnLounge.MenuParser
         private static string GetTodaysMenu(string fullMenu)
         {
             var weekDays = new[]
-{
+            {
                 "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag",
                 "Sonntag"
             };
@@ -80,7 +80,8 @@ namespace SaturnLounge.MenuParser
 
         private static string PrettyPrintText(string text)
         {
-            var textWithoutMultipleEmptyRows = Regex.Replace(text, @"^(\s*\n){2,}|^(\s*\r\n){2,}", "", RegexOptions.Multiline);
+            var textWithoutMultipleEmptyRows = Regex.Replace(text, @"^(\s*\n){2,}|^(\s*\r\n){2,}", "",
+                RegexOptions.Multiline);
             return textWithoutMultipleEmptyRows.Replace(", ", "");
         }
     }
