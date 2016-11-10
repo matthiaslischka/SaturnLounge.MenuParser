@@ -28,7 +28,7 @@ namespace SaturnLounge.MenuParser
             Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine(PrettyPrintText(todaysMenu));
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
 
         private static FileInfo EnsureMenuFile()
