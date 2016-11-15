@@ -11,8 +11,6 @@ after_build:
 artifacts: 
     path: SaturnLounge.MenuParser.zip
     name: SaturnLounge.MenuParser
-    on:
-        branch: master
     
 deploy:
     release: SaturnLounge.MenuParser-v$(appveyor_build_version)
