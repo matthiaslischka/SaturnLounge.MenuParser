@@ -3,8 +3,11 @@ configuration: Release
 before_build:
  - nuget restore
  
+after_build:
+ - 7z a SaturnLounge.MenuParser.zip %APPVEYOR_BUILD_FOLDER%\SaturnLounge.MenuParser\bin\Release\SaturnLounge.MenuParser.exe, SaturnLounge.MenuParser\bin\Release\itextsharp.dll
+ 
 artifacts: 
-  - path: SaturnLounge.MenuParser\bin\Release\SaturnLounge.MenuParser.exe
+  - path: SaturnLounge.MenuParser.zip
     name: SaturnLounge.MenuParser
     
 deploy:
