@@ -4,5 +4,5 @@ before_build:
  - nuget restore
  
 artifacts: 
-  - path: bin\$(configuration)\*.exe
+  - path: SaturnLounge.MenuParser\bin\Release\SaturnLounge.MenuParser.exe
     name: SaturnLounge.MenuParser.exe
