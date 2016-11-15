@@ -1,24 +1,27 @@
 configuration: Release
 
+skip_tags: true
+
 before_build:
- - nuget restore
+    nuget restore
  
 after_build:
- - 7z a SaturnLounge.MenuParser.zip %APPVEYOR_BUILD_FOLDER%\SaturnLounge.MenuParser\bin\Release\SaturnLounge.MenuParser.exe %APPVEYOR_BUILD_FOLDER%\SaturnLounge.MenuParser\bin\Release\itextsharp.dll
+    7z a SaturnLounge.MenuParser.zip %APPVEYOR_BUILD_FOLDER%\SaturnLounge.MenuParser\bin\Release\SaturnLounge.MenuParser.exe %APPVEYOR_BUILD_FOLDER%\SaturnLounge.MenuParser\bin\Release\itextsharp.dll
  
 artifacts: 
-  - path: SaturnLounge.MenuParser.zip
+    path: SaturnLounge.MenuParser.zip
     name: SaturnLounge.MenuParser
+    on:
+    branch: master
     
 deploy:
-  release: SaturnLounge.MenuParser-v$(appveyor_build_version)
-  description: 'SaturnLounge MenuParser'
-  provider: GitHub
-  auth_token:
-    secure: MidR5T9SuBalncsh2ACJNGHmZzsmGYj3yHt1phhIX1Wlafm0TxRr5fztAfPe7c4d
-  artifact: SaturnLounge.MenuParser
-  draft: false
-  prerelease: false
-  on:
-    branch: master
-  skip_tags: true
+    release: SaturnLounge.MenuParser-v$(appveyor_build_version)
+    description: 'SaturnLounge MenuParser'
+    provider: GitHub
+    auth_token:
+        secure: MidR5T9SuBalncsh2ACJNGHmZzsmGYj3yHt1phhIX1Wlafm0TxRr5fztAfPe7c4d
+    artifact: SaturnLounge.MenuParser
+    draft: false
+    prerelease: false
+    on:
+        branch: master
