@@ -5,4 +5,17 @@ before_build:
  
 artifacts: 
   - path: SaturnLounge.MenuParser\bin\Release\SaturnLounge.MenuParser.exe
-    name: SaturnLounge.MenuParser.exe
+    name: SaturnLounge.MenuParser
+    
+deploy:
+  release: SaturnLounge.MenuParser-v$(appveyor_build_version)
+  description: 'SaturnLounge MenuParser'
+  provider: GitHub
+  auth_token:
+    secure: MidR5T9SuBalncsh2ACJNGHmZzsmGYj3yHt1phhIX1Wlafm0TxRr5fztAfPe7c4d
+  artifact: SaturnLounge.MenuParser
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: true
