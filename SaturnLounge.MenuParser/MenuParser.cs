@@ -20,15 +20,36 @@ namespace SaturnLounge.MenuParser
         public static void Main()
         {
             var menuFile = EnsureMenuFile();
+            var day = DateTime.Today;
 
-            var menuText = ExtractTextFromPdf(menuFile);
+            while (true)
+            {
+                var menuText = ExtractTextFromPdf(menuFile);
 
-            var todaysMenu = GetTodaysMenu(menuText);
+                var todaysMenu = GetTodaysMenu(menuText, day);
 
-            Console.OutputEncoding = Encoding.UTF8;
-            Console.WriteLine(PrettyPrintText(todaysMenu));
+                if (string.IsNullOrEmpty(todaysMenu))
+                    Console.WriteLine(day.ToShortDateString() + ": No menu (yet?) for this day");
+                else
+                {
+                    Console.OutputEncoding = Encoding.UTF8;
+                    Console.WriteLine(PrettyPrintText(todaysMenu));
+                }
 
-            Console.ReadKey();
+                var consoleKeyInfo = Console.ReadKey();
+                switch (consoleKeyInfo.Key)
+                {
+                    case ConsoleKey.RightArrow:
+                        day = day.AddDays(1);
+                        break;
+                    case ConsoleKey.LeftArrow:
+                        day = day.AddDays(-1);
+                        break;
+                    default:
+                        return;
+                }
+                Console.Clear();
+            }
         }
 
         private static FileInfo EnsureMenuFile()
@@ -65,7 +86,7 @@ namespace SaturnLounge.MenuParser
             }
         }
 
-        private static string GetTodaysMenu(string fullMenu)
+        private static string GetTodaysMenu(string fullMenu, DateTime day)
         {
             var weekDays = new[]
             {
@@ -75,11 +96,14 @@ namespace SaturnLounge.MenuParser
 
             var menuSplittedByDays = fullMenu.Split(weekDays, StringSplitOptions.RemoveEmptyEntries);
 
-            return menuSplittedByDays.FirstOrDefault(s => s.Contains(DateTime.Today.ToShortDateString()));
+            return menuSplittedByDays.FirstOrDefault(s => s.Contains(day.ToShortDateString()));
         }
 
         private static string PrettyPrintText(string text)
         {
+            if (text == null)
+                return string.Empty;
+
             var textWithoutMultipleEmptyRows = Regex.Replace(text, @"^(\s*\n){2,}|^(\s*\r\n){2,}", "",
                 RegexOptions.Multiline);
             return textWithoutMultipleEmptyRows.Replace(", ", "");
