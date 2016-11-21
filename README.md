@@ -4,3 +4,8 @@
 
 
 ![](/screenshot.png?raw=true)
+
+
+## Be Aware
+* saves pdfs at ```C:\tmp\saturn-lounge-menus```
+* use arrow keys to switch between days
